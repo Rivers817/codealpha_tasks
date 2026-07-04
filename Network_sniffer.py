@@ -57,14 +57,19 @@ def packet_callback(packet):
         print(tabulate(packet_data, headers=headers, tablefmt="grid"))
         print(f"\n Captured {len(packet_data)} packets (Ctrl+C to stop)")
 
-print(" Starting Network Sniffer...")
-print("Press Ctrl+C to stop and see summary\n")
+def main():
+    print(" Starting Network Sniffer...")
+    print("Press Ctrl+C to stop and see summary\n")
 
-try:
-    sniff(prn=packet_callback, store=False)
-except KeyboardInterrupt:
-    print("\n\n" + "="*80)
-    print("FINAL SUMMARY")
-    print("="*80)
-    print(tabulate(packet_data, headers=["#", "Time", "Protocol", "Source", "Destination", "Payload Preview"], tablefmt="grid"))
-    print(f"\n Total packets captured: {len(packet_data)}")
+    try:
+        sniff(prn=packet_callback, store=False)
+    except KeyboardInterrupt:
+        print("\n\n" + "="*80)
+        print("FINAL SUMMARY")
+        print("="*80)
+        print(tabulate(packet_data, headers=["#", "Time", "Protocol", "Source", "Destination", "Payload Preview"], tablefmt="grid"))
+        print(f"\n Total packets captured: {len(packet_data)}")
+
+
+if __name__ == "__main__":
+    main()
